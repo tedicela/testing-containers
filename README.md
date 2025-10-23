@@ -1,7 +1,7 @@
 # 🧪 testing-containers
 
 [![PyPI](https://img.shields.io/pypi/v/testing-containers.svg)](https://pypi.org/project/testing-containers/)
-[![CI](https://github.com/your-org/testing-containers/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/testing-containers/actions/workflows/ci.yml)
+[![CI](https://github.com/tedicela/testing-containers/actions/workflows/ci.yml/badge.svg)](https://github.com/tedicela/testing-containers/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 > **Lightweight Python utilities for running ephemeral Docker containers in tests.**  
