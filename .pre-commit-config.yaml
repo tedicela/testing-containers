@@ -1,0 +1,46 @@
+# .pre-commit-config.yaml
+# Run: `pre-commit install` after cloning the repo
+# Then every `git commit` will auto-check style, types, and basic safety.
+
+repos:
+  # 1️⃣ Ruff: lint + format (replaces flake8, isort, black)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        name: Ruff lint
+        args: ["--fix"]
+      - id: ruff-format
+        name: Ruff format
+
+  # 2️⃣ mypy: static type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        name: Mypy type checker
+        additional_dependencies:
+          - psycopg
+          - pydantic
+          - types-psycopg
+        args: ["--strict", "src", "tests"]
+
+  # 3️⃣ basic hygiene hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  # 4️⃣ pytest quick check (optional but great safety net)
+  - repo: local
+    hooks:
+      - id: pytest
+        name: Run pytest quick suite
+        entry: poetry run pytest -q
+        language: system
+        pass_filenames: false
+        stages: [push]
