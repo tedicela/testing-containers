@@ -22,6 +22,8 @@ jobs:
           poetry-version: "1.8.3"
       - name: Install
         run: poetry install --no-interaction
+      - name: Install pre-commit
+        run: pre-commit install
       - name: Lint
         run: pre-commit run --all-files
         env:
