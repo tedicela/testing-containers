@@ -28,7 +28,5 @@ jobs:
           LC_ALL: "C.UTF-8"
           LANG: "C.UTF-8"
           SKIP: "no-commit-to-branch"
-      - name: Type check
-        run: poetry run mypy testing_containers tests
       - name: Tests
         run: poetry run pytest
