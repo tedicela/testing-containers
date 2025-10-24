@@ -10,8 +10,8 @@ authors = ["Tedi Cela <tedicela@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{ include = "testing_containers", from = "src" }]
-homepage = "https://github.com/your-org/testing-containers"
-repository = "https://github.com/your-org/testing-containers"
+homepage = "https://github.com/tedicela/testing-containers"
+repository = "https://github.com/tedicela/testing-containers"
 keywords = ["postgresql", "testing", "pytest", "docker", "alembic"]
 classifiers = [
   "Development Status :: 4 - Beta",
