@@ -1,5 +1,3 @@
-import types
-from typing import Any
 import pytest
 
 
@@ -20,7 +18,7 @@ def fake_run_success(monkeypatch, dummy_completed_process):
     """Mock subprocess.run; configurable per-test via closure."""
     calls = []
 
-    def _fake_run(cmd, stdout=None, stderr=None, text=None, check=False, env=None):
+    def _fake_run(cmd, capture_output=True, text=None, check=False, env=None):
         calls.append(cmd)
         # default happy path
         return dummy_completed_process(returncode=0, stdout="", stderr="")
@@ -28,12 +26,13 @@ def fake_run_success(monkeypatch, dummy_completed_process):
     monkeypatch.setattr("subprocess.run", _fake_run)
     return calls
 
+
 @pytest.fixture
 def fake_run_fail(monkeypatch, dummy_completed_process):
     """Mock subprocess.run; configurable per-test via closure."""
     calls = []
 
-    def _fake_run(cmd, stdout=None, stderr=None, text=None, check=False, env=None):
+    def _fake_run(cmd, capture_output=True, text=None, check=False, env=None):
         calls.append(cmd)
         # default happy path
         return dummy_completed_process(returncode=1, stdout="", stderr="")
@@ -45,14 +44,15 @@ def fake_run_fail(monkeypatch, dummy_completed_process):
 @pytest.fixture
 def fake_psycopg_connect(monkeypatch):
     """Mock psycopg.connect with minimal context manager + cursor behavior."""
+
     class DummyCursor:
         def __init__(self, store):
             self.store = store
 
-        def execute(self, sql, params=None):
+        def execute(self, sql, params=None) -> None:
             self.store.append(("execute", sql, params))
 
-        def close(self):
+        def close(self) -> None:
             pass
 
         def __enter__(self):
@@ -67,10 +67,10 @@ def fake_psycopg_connect(monkeypatch):
             self.closed = False
             self.store = store
 
-        def cursor(self):
+        def cursor(self) -> DummyCursor:
             return DummyCursor(self.store)
 
-        def close(self):
+        def close(self) -> None:
             self.closed = True
 
         def __enter__(self):

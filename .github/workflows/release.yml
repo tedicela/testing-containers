@@ -23,7 +23,7 @@ jobs:
           pip install commitizen
           cz bump --yes --changelog
           echo "version=$(python -c 'import tomllib,sys;print(tomllib.load(open(\"pyproject.toml\",\"rb\"))[\"tool\"][\"poetry\"][\"version\"])')" >> $GITHUB_OUTPUT
-          
+
           # Push bump commit and tags back to origin
           git push --follow-tags
           echo "RELEASE_NEEDED=true" >> $GITHUB_ENV

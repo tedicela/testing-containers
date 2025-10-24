@@ -4,7 +4,7 @@
 [![CI](https://github.com/tedicela/testing-containers/actions/workflows/ci.yml/badge.svg)](https://github.com/tedicela/testing-containers/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **Lightweight Python utilities for running ephemeral Docker containers in tests.**  
+> **Lightweight Python utilities for running ephemeral Docker containers in tests.**
 > Includes `TestingPostgres` for disposable PostgreSQL test databases and `DockerContainer` for ad-hoc containers.
 
 - [Overview](#🚀-overview)
@@ -36,12 +36,12 @@ The goal is simple:
 
 ## 🧭 Design Principles
 
-- 🧩 **No external services** need to be manually started  
-- 🔁 **Fresh empty databases** are created every test run  
-- 🧹 **Automatic cleanup** when tests finish  
-- 🧱 **No pollution of your dev DB** — tests never touch your development data  
-- ⚙️ **Consistent environments** — use the same database version as production via Docker  
-- 🧰 **Generic & extensible** — same approach works for PostgreSQL, Redis, LocalStack, RabbitMQ, etc.  
+- 🧩 **No external services** need to be manually started
+- 🔁 **Fresh empty databases** are created every test run
+- 🧹 **Automatic cleanup** when tests finish
+- 🧱 **No pollution of your dev DB** — tests never touch your development data
+- ⚙️ **Consistent environments** — use the same database version as production via Docker
+- 🧰 **Generic & extensible** — same approach works for PostgreSQL, Redis, LocalStack, RabbitMQ, etc.
 - 🐳 **Only dependency:** Docker (required only when containers are used)
 
 ---
@@ -71,7 +71,7 @@ pg = TestingPostgres(
         namespace="myproject-name" # optional – you can add a namespace to the container
         name="testdb" # optional – you can give a name to the container
         image="postgres:15.6" # optional / default postgres:16.3
-        # The following options defines what should happen on stop() 
+        # The following options defines what should happen on stop()
         # container will stop or not
         # container will be removed or not
         # (you can decide on the speed you want on test startup and teardown)
@@ -83,10 +83,10 @@ testdb = pg.postgres.testdb  # connection info for your test DB
 
 # Connect and run migrations or tests
 conn = psycopg.connect(
-    dbname=testdb.name, 
-    user=testdb.user, 
+    dbname=testdb.name,
+    user=testdb.user,
     password=testdb.password,
-    host=testdb.host, 
+    host=testdb.host,
     port=testdb.port,
 )
 print("Connected:", conn)
@@ -202,10 +202,10 @@ redis.remove_container()
 
 ## 💡 Inspiration and Motivation
 
-This project was inspired by the excellent [`testing.postgresql`](https://pypi.org/project/testing.postgresql/) package,  
+This project was inspired by the excellent [`testing.postgresql`](https://pypi.org/project/testing.postgresql/) package,
 which provides temporary PostgreSQL instances for testing.
 
-However, `testing.postgresql` requires **PostgreSQL to be installed locally** on the developer’s machine.  
+However, `testing.postgresql` requires **PostgreSQL to be installed locally** on the developer’s machine.
 That can lead to common issues in real-world teams:
 
 - Developers might have **different PostgreSQL versions** installed.
@@ -213,8 +213,8 @@ That can lead to common issues in real-world teams:
 - Installing or managing Postgres locally can be **slow or error-prone in CI and requires additional setup**
 
 `testing-containers` solves these problems by leveraging **Docker**:
-- No local Postgres installation required.  
-- The same Postgres (or Redis, MariaDB, etc.) **version used in production** can be pulled and run in tests.  
+- No local Postgres installation required.
+- The same Postgres (or Redis, MariaDB, etc.) **version used in production** can be pulled and run in tests.
 - Works identically on **any environment** — macOS, Linux, Windows, or CI/CD runners.
 
 In short, it keeps the convenience of `testing.postgresql` while ensuring **environment parity and zero setup**.

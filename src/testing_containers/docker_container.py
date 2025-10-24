@@ -4,27 +4,32 @@ import sys
 
 
 class DockerContainer:
-    def __init__(self, 
+    def __init__(
+        self,
         image: str,
-        container_name: str, 
-        expose_ports: list[str] = [],
-        env: dict = {},
+        container_name: str,
+        expose_ports: list[str] | None = None,
+        env: dict[str, str] | None = None,
     ):
         self.image = image
         self.container_name = container_name
-        self.expose_ports = expose_ports
-        self.env = env
+        self.expose_ports = expose_ports or []
+        self.env = env or {}
 
-    def _run_command(self, command: list, check=False, env = {}) -> subprocess.CompletedProcess:
+    def _run_command(
+        self, command: list[str], check: bool = False, env: dict[str, str] | None = None
+    ) -> subprocess.CompletedProcess[str]:
         """Runs a shell command and returns the completed process."""
+        if env is None:
+            env = {}
+
         try:
             return subprocess.run(
-                command, 
-                stdout=subprocess.PIPE, 
-                stderr=subprocess.PIPE, 
-                text=True, 
+                command,
+                capture_output=True,
+                text=True,
                 check=check,
-                env={**os.environ, **env}
+                env={**os.environ, **env},
             )
         except subprocess.CalledProcessError as e:
             print(f"Command failed: {e}")
@@ -50,7 +55,7 @@ class DockerContainer:
             print("⚠️  Docker daemon is not running. Please start Docker.")
             return False
         return True
-    
+
     def is_container_running(self) -> bool:
         """Checks if the specified container is running."""
         result = self._run_command(
@@ -61,14 +66,22 @@ class DockerContainer:
     def container_exists(self) -> bool:
         """Checks if the container exists (running or stopped)."""
         result = self._run_command(
-            ["docker", "ps", "-a", "--filter", f"name={self.container_name}", "--format", "{{.Names}}"]
+            [
+                "docker",
+                "ps",
+                "-a",
+                "--filter",
+                f"name={self.container_name}",
+                "--format",
+                "{{.Names}}",
+            ]
         )
         return self.container_name in result.stdout.strip()
-    
-    def exec(self, command: list) -> subprocess.CompletedProcess:
+
+    def exec(self, command: list[str]) -> subprocess.CompletedProcess[str]:
         return self._run_command(["docker", "exec", self.container_name, *command])
-    
-    def start_container(self):
+
+    def start_container(self) -> None:
         """Starts the container using `docker run` if it's not running."""
         if self.is_container_running():
             print(f"Container {self.container_name} is already running.")
@@ -87,18 +100,22 @@ class DockerContainer:
             for p in self.expose_ports:
                 expose_port = p.split(":")
                 port_options += ["-p", f"{expose_port[0]}:{expose_port[1]}"]
-                
+
             command = [
-                "docker", "run", "--name", self.container_name,
-                *env_options, 
+                "docker",
+                "run",
+                "--name",
+                self.container_name,
+                *env_options,
                 *port_options,
-                "-d", self.image,
+                "-d",
+                self.image,
             ]
 
         self._run_command(command, check=True)
         print(f"✅ Container '{self.container_name}' started on ports {self.expose_ports}")
-    
-    def stop_container(self):
+
+    def stop_container(self) -> None:
         """Stops and removes the container if it's running."""
         if self.is_container_running():
             print(f"Stopping container: {self.container_name}...")
@@ -107,7 +124,7 @@ class DockerContainer:
         else:
             print(f"Container {self.container_name} is not running.")
 
-    def remove_container(self):
+    def remove_container(self) -> None:
         """Removes the container"""
         if self.is_container_running():
             print(f"Stopping container: {self.container_name}...")

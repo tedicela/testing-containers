@@ -5,8 +5,8 @@ import testing_containers.postgres.postgres_manager as pm
 from testing_containers.models import DBConfig
 from testing_containers.postgres.postgres_manager import PostgresManager
 
-
 # --- helpers: dummy psycopg connection/cursor --------------------------------
+
 
 class DummyCursor:
     def __init__(self, store):
@@ -32,7 +32,7 @@ class DummyConn:
     def cursor(self):
         return DummyCursor(self.store)
 
-    def close(self):
+    def close(self) -> None:
         self.closed = True
 
     # context manager protocol
@@ -69,6 +69,7 @@ def patch_connect(monkeypatch, store):
 
 # --- tests -------------------------------------------------------------------
 
+
 def test__connect_caches_connection(cfg, store, patch_connect):
     mgr = PostgresManager(cfg)
     conn1 = mgr._connect()
@@ -78,7 +79,7 @@ def test__connect_caches_connection(cfg, store, patch_connect):
     assert patch_connect["n"] == 1  # connect called once
 
     # If connection is marked closed, _connect should call connect again
-    conn1.closed = True # type: ignore
+    conn1.closed = True  # type: ignore
     conn3 = mgr._connect()
     assert conn3 is not conn1
     assert patch_connect["n"] == 2
@@ -112,7 +113,7 @@ def test_create_database_executes_sql_with_autocommit(cfg, store, patch_connect,
     stmt, params = executes[0][1], executes[0][2]
 
     # Statement must be a psycopg sql object and include CREATE DATABASE with the db name
-    assert isinstance(stmt, (sql.Composed, sql.SQL, str))
+    assert isinstance(stmt, sql.Composed | sql.SQL | str)
     assert "CREATE DATABASE" in str(stmt)
     assert "my_test_db" in str(stmt)
     assert params is None
