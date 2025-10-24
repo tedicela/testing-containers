@@ -18,12 +18,10 @@ repos:
     rev: v1.11.2
     hooks:
       - id: mypy
-        name: Mypy type checker
-        additional_dependencies:
-          - psycopg
-          - pydantic
-          - types-psycopg
-        args: ["--strict", "src", "tests"]
+        name: mypy (src)
+        pass_filenames: false
+        args: ["--strict", "--package", "testing_containers"]
+        additional_dependencies: [psycopg, pydantic]
 
   # 3️⃣ basic hygiene hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks

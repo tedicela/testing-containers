@@ -1,6 +1,6 @@
-from .models import DBConfig, ContainerOptions
-from .postgres.testing_postgres import TestingPostgres
 from .docker_container import DockerContainer
+from .models import ContainerOptions, DBConfig
+from .postgres.testing_postgres import TestingPostgres
 
 """
 testing_services

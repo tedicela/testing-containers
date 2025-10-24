@@ -1,4 +1,3 @@
-from typing import Optional
 from pydantic import BaseModel
 
 
@@ -9,9 +8,10 @@ class DBConfig(BaseModel):
     password: str
     port: int
 
+
 class ContainerOptions(BaseModel):
-    namespace: Optional[str] = None
-    name: Optional[str] = None
-    image: Optional[str] = None
+    namespace: str | None = None
+    name: str | None = None
+    image: str | None = None
     should_stop: bool = False
     remove_on_stop: bool = False

@@ -1,8 +1,8 @@
 
 # 🤝 Contributing to testing-containers
 
-First off — thank you for taking the time to contribute 💙  
-`testing-containers` is a lightweight library that helps developers run ephemeral Docker containers (like Postgres, Redis, LocalStack, etc.) during testing.  
+First off — thank you for taking the time to contribute 💙
+`testing-containers` is a lightweight library that helps developers run ephemeral Docker containers (like Postgres, Redis, LocalStack, etc.) during testing.
 We welcome improvements, bug fixes, new service integrations, and documentation updates!
 
 ---

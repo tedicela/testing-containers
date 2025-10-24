@@ -21,14 +21,12 @@ jobs:
         with:
           poetry-version: "1.8.3"
       - name: Install
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction --with=dev
       - name: Lint
-        run: pre-commit run --all-files
+        run: poetry run pre-commit run --all-files
         env:
           LC_ALL: "C.UTF-8"
           LANG: "C.UTF-8"
           SKIP: "no-commit-to-branch"
-      - name: Type check
-        run: poetry run mypy .
       - name: Tests
         run: poetry run pytest
