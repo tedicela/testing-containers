@@ -18,7 +18,7 @@ class PostgresManager:
 
     def _connect(self) -> Connection:
         """Establish a connection to the specified database."""
-        if self.connection is None or self.connection.closed:
+        if not hasattr(self, "connection") or self.connection.closed:
             self.connection = connect(
                 dbname=self.master_db.name,
                 user=self.master_db.user,
