@@ -17,6 +17,7 @@
 - [Why use this](#🧠-why-use-this)
 - [Requirements](#🧪-requirements)
 - [Inspiration & Motivation](#💡-inspiration-and-motivation)
+- [Contributing](./CONTRIBUTING.md)
 
 ---
 
