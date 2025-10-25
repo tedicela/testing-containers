@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Initial release with `DockerContainer` and `TestingPostgres`.
 
+## v0.4.0 (2025-10-25)
+
+### Feat
+
+- update doc and ci (#9)
+
 ## v0.3.1 (2025-10-25)
 
 ### Fix
