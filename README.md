@@ -7,18 +7,6 @@
 > **Lightweight Python utilities for running ephemeral Docker containers in tests.**
 > Includes `TestingPostgres` for disposable PostgreSQL test databases and `DockerContainer` for ad-hoc containers.
 
-- [Overview](#-overview)
-- [Design Principles](#-design-principles)
-- [Installation](#-installation)
-- [Usage](#-usage)
-  - [TestingPostgres](#testingpostgres)
-    - [Example: using pytests, alembic and settings on conftest](#example-using-pytests-alembic-and-settings-on-conftest)
-  - [DockerContainer](#generic-dockercontainer)
-- [Why use this](#-why-use-this)
-- [Requirements](#-requirements)
-- [Inspiration & Motivation](#-inspiration-and-motivation)
-- [Contributing](./CONTRIBUTING.md)
-
 ---
 
 ## 🚀 Overview
@@ -201,9 +189,9 @@ redis.remove_container()
 - Python 3.10+
 - Docker (required only for containerized tests)
 
-## 💡 Inspiration and Motivation
+## 💡 Inspiration
 
-This project was inspired by the excellent [`testing.postgresql`](https://pypi.org/project/testing.postgresql/) package,
+This project was inspired by [`testing.postgresql`](https://pypi.org/project/testing.postgresql/) package,
 which provides temporary PostgreSQL instances for testing.
 
 However, `testing.postgresql` requires **PostgreSQL to be installed locally** on the developer’s machine.
