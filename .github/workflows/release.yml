@@ -36,8 +36,7 @@ jobs:
 
       - name: Install & build
         run: |
-          poetry install --no-interaction
-          poetry build
+          poetry install --no-interaction && poetry build
 
       - name: Create GitHub Release
         if: env.RELEASE_NEEDED == 'true'
