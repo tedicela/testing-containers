@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "testing-containers"
-version = "0.3.0"
+version = "0.2.0"
 description = "Spin up an isolated PostgreSQL test database (reusing local PG or Docker) with zero external service requirements for your test run."
 authors = ["Tedi Cela <tedicela@gmail.com>"]
 license = "MIT"
