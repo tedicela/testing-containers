@@ -7,16 +7,16 @@
 > **Lightweight Python utilities for running ephemeral Docker containers in tests.**
 > Includes `TestingPostgres` for disposable PostgreSQL test databases and `DockerContainer` for ad-hoc containers.
 
-- [Overview](#🚀-overview)
-- [Design Principles](#🧭-design-principles)
-- [Installation](#⚙️-installation)
-- [Usage](#💡-usage)
+- [Overview](#-overview)
+- [Design Principles](#-design-principles)
+- [Installation](#-installation)
+- [Usage](#-usage)
   - [TestingPostgres](#testingpostgres)
     - [Example: using pytests, alembic and settings on conftest](#example-using-pytests-alembic-and-settings-on-conftest)
   - [DockerContainer](#generic-dockercontainer)
-- [Why use this](#🧠-why-use-this)
-- [Requirements](#🧪-requirements)
-- [Inspiration & Motivation](#💡-inspiration-and-motivation)
+- [Why use this](#-why-use-this)
+- [Requirements](#-requirements)
+- [Inspiration & Motivation](#-inspiration-and-motivation)
 - [Contributing](./CONTRIBUTING.md)
 
 ---
