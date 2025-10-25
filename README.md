@@ -137,18 +137,18 @@ with patch.dict(os.environ, env_vars):
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_test_db():
-    """Setup and teardown for the test database"""
+    """Setup and teardown for the test db"""
     # Run Alembic migrations
-    alembic_cfg = Config("alembic.ini")  # Ensure the path to alembic.ini is correct
+    # Ensure the path to alembic.ini is correct
+    alembic_cfg = Config("alembic.ini")
     try:
         command.upgrade(alembic_cfg, "head")
     except Exception:
         raise
 
-    yield  # Run tests
+    yield
 
-    # Cleanup: Stop and remove the test DB
-    testdb.stop()
+    testdb.stop() # Tear down test db
 ```
 
 
