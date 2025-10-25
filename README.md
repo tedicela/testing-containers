@@ -57,7 +57,7 @@ pip install testing-containers
 
 ## 💡 Usage
 
-### 1️⃣ `TestingPostgres`
+### `TestingPostgres`
 
 You can use `TestingPostgres` in two ways
 
@@ -164,7 +164,7 @@ def setup_test_db():
 ```
 
 
-### 2️⃣ Generic DockerContainer
+### Generic DockerContainer
 Start any service container on demand — e.g. Redis:
 
 ```python
